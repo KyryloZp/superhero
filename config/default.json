@@ -1,5 +1,0 @@
-{
-  "port": 5000,
-  "mongoUri": "mongodb+srv://Teonas:15362411@cluster0.rffu0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-  "jwtSecret": "test password"
-}
