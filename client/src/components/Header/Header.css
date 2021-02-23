@@ -1,0 +1,18 @@
+.header__wallpaper {
+    position: relative;
+    max-height: 400px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.header__nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__nav > img {
+    width: 52px;
+    height: 52px;
+}

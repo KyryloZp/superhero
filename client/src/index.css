@@ -1,0 +1,10 @@
+@import "~materialize-css/dist/css/materialize.css";
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+}

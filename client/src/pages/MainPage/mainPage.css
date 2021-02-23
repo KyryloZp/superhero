@@ -1,0 +1,31 @@
+.main__title {
+    text-align: center;
+}
+
+.main__details {
+    color: #ffab40;
+    transition: color .3s ease;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin: 0;
+}
+
+.main__details:hover {
+    color: #ffd8a6;
+}
+
+.main__card {
+    position: relative;
+    overflow:hidden;
+    height:300px;
+}
+
+.main__card__image {
+    position: absolute !important;
+    top:50% !important;
+    left:50% !important;
+    transform:translate(-50%,-50%) !important;
+    width:300px !important;
+    height:300px !important;
+    object-fit:cover !important;
+}
