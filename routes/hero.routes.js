@@ -88,13 +88,12 @@ router.get(
     async (req, res) => {
         try {
             let page = req.query.page;
-            let limit = req.query.limit;
-            let leftPortionPageNumber = (page - 1) * limit + 1;
-            let rightPortionPageNumber = page * limit;
+            let limitOnPage = +req.query.limit;
+            let leftPortionPageNumber = (page - 1) * limitOnPage + 1;
 
             const itemsCount =  await Hero.count()
-            const hero = await Hero.find().skip(leftPortionPageNumber).limit(rightPortionPageNumber)
-            const portionPage = itemsCount / limit;
+            const hero = await Hero.find().skip(leftPortionPageNumber).limit(limitOnPage)
+            const portionPage = itemsCount / limitOnPage;
 
 
             let itemsArr = []

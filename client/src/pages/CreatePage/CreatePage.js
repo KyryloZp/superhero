@@ -4,6 +4,7 @@ import {useForm} from "react-hook-form";
 import {Button} from "react-materialize";
 import {useHttp} from "../../hooks/http.hook";
 import {useHistory} from "react-router";
+import PhotoLine from "../../components/PhotoLine/PhotoLine";
 
 export const CreatePage = () => {
 
@@ -93,7 +94,7 @@ export const CreatePage = () => {
                                     <div className="create__uploadImages">
                                         {hero.previewImage.length !== 0 &&
                                         hero.previewImage.map((el) =>
-                                            <PhotoLine el={el} hero={hero} setHero={setHero}/>
+                                            <PhotoLine el={el} key={el.name} hero={hero} setHero={setHero}/>
                                         )}
                                     </div>
                                 </div>
@@ -111,16 +112,7 @@ export const CreatePage = () => {
     )
 }
 
-const PhotoLine = (props) => {
-    const {el} = props;
 
-
-    return (
-        <div className='create__images'>
-            <img className="create__preview" src={el} alt=""/>
-        </div>
-    )
-}
 
 
 export default CreatePage

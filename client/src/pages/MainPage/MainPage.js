@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useCallback} from "react";
 import './mainPage.css'
-import {Icon, Pagination} from "react-materialize";
+import {Col, Icon, Pagination, Preloader, Row} from "react-materialize";
 import {useHttp} from "../../hooks/http.hook";
 import {Card} from "../../components/Card/Card";
 
@@ -28,6 +28,20 @@ export const MainPage = () => {
         load()
     }, [load, currentPage])
 
+
+    if (items.length === 0) {
+        return <Row>
+            <Col s={4}>
+                <Preloader
+                    active
+                    color="blue"
+                    flashing={false}
+                    size="big"
+                />
+            </Col>
+        </Row>
+    }
+
     return (
         <div className="main">
             <div className="main__content">
@@ -42,9 +56,9 @@ export const MainPage = () => {
                 <Pagination
                     activePage={currentPage}
                     items={items.length !== 0 &&
-                    Math.round(items[0].portionPage+3)}
+                    Math.round(items[0].portionPage)}
                     leftBtn={<Icon  >chevron_left</Icon>}
-                    maxButtons={items.length !== 0 && Math.round(items[0].portionPage+1)}
+                    maxButtons={items.length !== 0 && Math.round(items[0].portionPage)}
                     rightBtn={<Icon>chevron_right</Icon>}
                     onSelect={e => setCurrentPage(e)}
                 />
