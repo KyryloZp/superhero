@@ -47,7 +47,9 @@ router.post(
             for (let key of req.files) {
                 let img = fs.readFileSync(key.path);
                 let encode_image = img.toString('base64');
-                hero.image.push({path: encode_image, contentType: key.mimetype, originalName: key.originalname})
+                // `data:${key.contentType};base64,${key.path}`
+                //hero.image.push({path: encode_image, contentType: key.mimetype, originalName: key.originalname})
+                hero.image.push({path: `data:${key.mimetype};base64,${encode_image}`, contentType: key.mimetype, originalName: key.originalname})
             }
 
 
@@ -89,24 +91,29 @@ router.get(
         try {
             let page = req.query.page;
             let limitOnPage = +req.query.limit;
-            let leftPortionPageNumber = (page - 1) * limitOnPage + 1;
+            let leftPortionPageNumber = (page - 1) * (limitOnPage + 1);
 
             const itemsCount =  await Hero.count()
             const hero = await Hero.find().skip(leftPortionPageNumber).limit(limitOnPage)
+            const hero2 = await Hero.find()
+            console.log(hero2)
             const portionPage = itemsCount / limitOnPage;
+
 
 
             let itemsArr = []
 
             for(let item of hero) {
                 let ImagesArr = []
-                let {nickname, realName, originDescription, superpowers, catchPhrase} = item
+                let {nickname, realName, originDescription, superpowers, catchPhrase, image} = item
 
-                for(let key of item.image) {
+
+
+/*                for(let key of item.image) {
                     ImagesArr.push(`data:${key.contentType};base64,${key.path}`)
-                }
+                }*/
 
-                itemsArr.push({nickname, realName, originDescription, superpowers, catchPhrase, ImagesArr, portionPage})
+                itemsArr.push({nickname, realName, originDescription, superpowers, catchPhrase, image, portionPage})
 
             }
 
@@ -124,17 +131,16 @@ router.get('/:name', [], async (req, res) => {
     try {
         const name = req.params.name
         const hero = await Hero.find({nickname: name.toLowerCase()})
-        const ImagesArr = []
-        const {nickname, realName, originDescription, superpowers, catchPhrase} = hero[0]
+        const {nickname, realName, originDescription, superpowers, catchPhrase, image} = hero[0]
 
 
 
-        for(let key of hero[0].image) {
+/*        for(let key of hero[0].image) {
             ImagesArr.push(`data:${key.contentType};base64,${key.path}`)
-        }
+        }*/
 
 
-        res.send({nickname, realName, originDescription, superpowers, catchPhrase, ImagesArr})
+        res.send({nickname, realName, originDescription, superpowers, catchPhrase, image})
 
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})

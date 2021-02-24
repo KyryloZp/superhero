@@ -49,9 +49,9 @@ export const DetailPage = (props) => {
 
     const images = [];
 
-    if (items.ImagesArr) {
-        items.ImagesArr.forEach(el => {
-            images.push({original: el})
+    if (items.image) {
+        items.image.forEach(el => {
+            images.push({original: el.path})
         })
     }
 

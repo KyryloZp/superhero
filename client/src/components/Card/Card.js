@@ -18,7 +18,7 @@ export const Card = (props) => {
         <div className="col s6 l6">
             <div className="card ">
                 <div className={`card-image ${props.className}`}>
-                    {props.item.ImagesArr && <img  className={`${props.className}__image`} src={props.item.ImagesArr[0]} />}
+                    {props.item.image.length !== 0 && <img  className={`${props.className}__image`} src={props.item.image[0].path} />}
                 </div>
                 <div className="card-content">
                     <p>{props.item.nickname}</p>
